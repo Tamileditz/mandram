@@ -1,0 +1,98 @@
+{% extends "dashboard.html" %}
+
+{% block content %}
+
+<style>
+    /* Container for event detail */
+.event-detail-container {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+/* Event title styling */
+.event-title {
+    font-size: 2rem;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+/* Event date styling */
+.event-date {
+    font-size: 1.2rem;
+    color: #666;
+    margin-bottom: 15px;
+}
+
+/* Event image styling */
+.event-image-detail {
+    max-width: 100%;
+    height: auto;
+    border-radius: 4px;
+    margin-bottom: 20px;
+}
+
+/* Event description styling */
+.event-description {
+    font-size: 1.2rem;
+    color: #444;
+    margin-bottom: 20px;
+}
+
+/* Back link styling */
+.back-link {
+    display: inline-block;
+    padding: 10px 15px;
+    font-size: 1rem;
+    color: #007bff;
+    text-decoration: none;
+    border: 1px solid #007bff;
+    border-radius: 4px;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.back-link:hover {
+    background-color: #007bff;
+    color: #fff;
+}
+
+/* Delete button styling */
+.delete-button {
+    display: inline-block;
+    padding: 10px 15px;
+    font-size: 1rem;
+    color: #fff;
+    background-color: #dc3545;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.delete-button:hover {
+    background-color: #c82333;
+}
+
+</style>
+
+<div class="event-detail-container">
+    <h2 class="event-title">{{ event['title'] }}</h2>
+    <p class="event-date">Date: {{ event['date'] }}</p>
+    {% if event['image_url'] %}
+    <img src="{{ url_for('uploaded_file', filename=event['image_url']) }}" alt="{{ event['title'] }}" class="event-image-detail">
+    {% endif %}
+    <p class="event-description">{{ event['description'] }}</p>
+    
+    <!-- Add a form to delete the event -->
+    <form action="{{ url_for('delete_event', event_id=event['id']) }}" method="post" style="margin-top: 20px;">
+        <button type="submit" class="delete-button">Delete Event</button>
+    </form>
+
+    <a href="{{ url_for('view_event') }}" class="back-link">Back to Events</a>
+</div>
+{% endblock %}

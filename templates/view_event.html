@@ -1,0 +1,17 @@
+{% extends "dashboard.html" %}
+
+{% block content %}
+<h2>View Events</h2>
+<div class="events-container">
+    {% for event in events %}
+    <div class="event-card">
+        <h3 class="event-title">{{ event['title'] }}</h3>
+        {% if event['image_url'] %}
+        <img src="{{ url_for('uploaded_file', filename=event['image_url']) }}" alt="{{ event['title'] }}" class="event-image">
+        {% endif %}
+        <p class="event-description">{{ event['description'] }}</p>
+        <a href="{{ url_for('event_detail', event_id=event['id']) }}" class="event-link">More Details</a>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

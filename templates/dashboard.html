@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/styles.css') }}">
+</head>
+<body>
+    <div class="header">
+        <div class="username">Welcome, {{ username }}</div>
+        <a href="{{ url_for('logout') }}" class="logout-button">Sign Out</a>
+    </div>
+    <div class="content">
+        {% block content %}{% endblock %}
+    </div>
+    <div class="dashboard-container">
+        <h2>Dashboard</h2>
+        <a href="{{ url_for('data_entry') }}" class="card">
+            <i class="fas fa-user-plus"></i>
+            Member Entry
+        </a>
+        <a href="{{ url_for('view_edit') }}" class="card">
+            <i class="fas fa-book"></i>
+            View & Edit Members
+        </a>
+        <a href="{{ url_for('create_event') }}" class="card">
+            <i class="fas fa-calendar-plus"></i>
+            Create Event
+        </a>
+        <a href="{{ url_for('view_event') }}" class="card">
+            <i class="fas fa-calendar"></i>
+            View Events
+        </a>
+    </div>
+</body>
+</html>

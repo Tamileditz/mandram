@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Member Detail View</title>
+    <link rel="stylesheet" href="static/styles/styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 900px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .header .username {
+            font-size: 18px;
+            color: #333;
+        }
+        .header .logout-button {
+            color: #007bff;
+            text-decoration: none;
+            font-size: 16px;
+        }
+        .profile-container {
+            display: flex;
+            align-items: flex-start;
+            width: 100%;
+        }
+        .profile-info {
+            flex: 1;
+            margin-right: 20px;
+        }
+        .profile-info .form-group {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+        .profile-info .form-group label {
+            font-weight: bold;
+            width: 40%;
+            margin: 0;
+        }
+        .profile-info .form-group p {
+            margin: 0;
+            width: 60%;
+            text-align: left;
+        }
+        .profile-image {
+            max-width: 200px;
+            max-height: 200px;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+        }
+        .profile-image img {
+            width: 100%;
+            height: auto;
+        }
+        .print-button {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            margin-top: 20px;
+            text-align: center;
+        }
+.header {
+    padding: 15px 30px;
+    background-color: #2c3e50;
+    color: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.header .username {
+    font-size: 1.2em;
+    font-weight: 500;
+    color: #fff;
+}
+.header .logout-button {
+    background-color: #e74c3c;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+}
+.header .logout-button:hover {
+    background-color: #c0392b;
+    transform: scale(1.05);
+}
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="username">Welcome, {{ username }}</div>
+        <a href="{{ url_for('logout') }}" class="logout-button">Sign Out</a>
+    </header>
+    <div class="container">
+        <h1>Member Detail View</h1>
+        
+        <div class="profile-container">
+            <!-- Member Info Section -->
+            <div class="profile-info">
+                <div class="form-group">
+                    <label>ID:</label>
+                    <p>{{ member.id }}</p>
+                </div>
+                <div class="form-group">
+                    <label>Name:</label>
+                    <p>{{ member.name }}</p>
+                </div>
+                <div class="form-group">
+                    <label>Date of Birth:</label>
+                    <p>{{ member.dob }}</p>
+                </div>
+                <div class="form-group">
+                    <label>Address:</label>
+                    <p>{{ member.address }}</p>
+                </div>
+                <div class="form-group">
+                    <label>Phone:</label>
+                    <p>{{ member.phone }}</p>
+                </div>
+                <div class="form-group">
+                    <label>Referred By:</label>
+                    <p>{{ member.referred_by }}</p>
+                </div>
+                <div class="form-group">
+                    <label>Occupation:</label>
+                    <p>{{ member.occupation }}</p>
+                </div>
+                <div class="form-group">
+                    <label>Date of Join:</label>
+                    <p>{{ member.date_of_join }}</p>
+                </div>
+                <div class="form-group">
+                    <label>Status:</label>
+                    <p>{{ member.status }}</p>
+                </div>
+            </div>
+            
+            <!-- Member Image Section -->
+            <div class="profile-image">
+                {% if member.photo_url %}
+                    <img src="{{ url_for('uploaded_file', filename=member.photo_url) }}" alt="Member Photo">
+                {% else %}
+                    <img src="static/images/default-profile.png" alt="Default Photo">
+                {% endif %}
+            </div>
+        </div>
+
+        <!-- Print Button -->
+        <a href="javascript:window.print()" class="print-button">Print</a>
+    </div>
+</body>
+</html>
